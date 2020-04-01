@@ -6,12 +6,12 @@ spring:
   application:
     name: UserPoolService
   datasource:
-    url: jdbc:postgresql://localhost:5432/userpooldb
+    url: jdbc:postgresql://localhost:5432/postgres
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: gunnerss
     initialization-mode: always
-    # data: classpath:data-postgres.sql
+    data: classpath:data-postgres.sql
     platform: postgres
     dbcp2:
       validation-query: SELECT 1
@@ -23,4 +23,4 @@ spring:
       hibernate.jdbc.lob.non_contextual_creation: true
       hibernate.default_schema: public
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
