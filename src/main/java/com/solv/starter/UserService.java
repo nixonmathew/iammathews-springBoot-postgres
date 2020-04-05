@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 public interface UserService {
 
-	public Users getUserDetails();
 	public List<Users> getUsers();
-	public void createUser(Users user);
+	public Users createUser(Users user);
+	public List<Users> getSortedUsers(String col,String dir);
+	public List<Users> getFilteredUsers(String col, String value);
+	
 }

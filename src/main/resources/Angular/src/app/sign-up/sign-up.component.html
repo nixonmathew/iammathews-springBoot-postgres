@@ -1,0 +1,60 @@
+<div class="login-btn">
+  <button mat-flat-button color="primary" type="submit" routerLink="/login">LOGIN</button>
+</div>
+<form class="example-form">
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <mat-label>First name</mat-label>
+          <input name="name" [(ngModel)]="name" matInput>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+
+  <p>
+    <mat-form-field class="example-full-width">
+      <mat-label>Address</mat-label>
+      <textarea matInput name="address" [(ngModel)]="address"></textarea>
+    </mat-form-field>
+  </p>
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <mat-label>Mobile</mat-label>
+          <input maxlength='10' [(ngModel)]="mobile" name="mobile" matInput>
+        </mat-form-field>
+      </td>
+
+    </tr>
+  </table>
+
+  <!-- <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <mat-label>User Name</mat-label>
+          <input [(ngModel)]="uname" name="uname" matInput>
+        </mat-form-field>
+      </td>
+
+    </tr>
+  </table>
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <mat-label>Password</mat-label>
+          <input [(ngModel)]="password" name="password" matInput>
+        </mat-form-field>
+      </td>
+
+    </tr>
+  </table> -->
+
+  <button mat-flat-button color="primary" type="submit" (click)="submit()">Sign Up</button>
+</form>

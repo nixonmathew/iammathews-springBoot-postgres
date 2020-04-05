@@ -12,29 +12,47 @@ public class Users {
 
 	@Id
 	@GeneratedValue
+    @Column(name="eid")
+	private int eid;
+
 	@Column(name="name")
 	private String name;
-	
+
 	@Column(name="mobile")
 	private String mobile ;
-	
+
 	@Column(name="address")
 	private String address ;
+
+	public Users() {
+		super();
+	}
+
 
 	public Users(String name, String mobile, String address) {
 		super();
 		this.name = name;
 		this.mobile = mobile;
 		this.address = address;
-	}	
-	
+	}
+
+
+	public int getEid() {
+		return eid;
+	}
+
+	public void setEid(int eid) {
+		this.eid = eid;
+	}
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getMobile() {
 		return mobile;
 	}
@@ -42,11 +60,16 @@ public class Users {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+
 	public String getAddress() {
 		return address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+
+
 
 }

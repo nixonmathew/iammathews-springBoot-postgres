@@ -1,0 +1,21 @@
+.user-block {
+    margin: 20px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.head {
+    cursor: pointer;
+    box-shadow: 1px 0px 5px 1px blue;
+    margin: 20px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.col {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    min-width: 200px;
+}
+.mat-card {
+    box-shadow: 2px 2px 16px green;
+}

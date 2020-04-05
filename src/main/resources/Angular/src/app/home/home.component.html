@@ -1,0 +1,79 @@
+<mat-card style="margin:50px">
+
+    <div class="head">
+        <h3 class="col" (click)="sort('eid')">
+            <span>Employee ID</span>
+            <span *ngIf="sortedCol === 'ascEID'" class="material-icons">
+                keyboard_arrow_down
+            </span>
+            <span *ngIf="sortedCol === 'dscEID'" class="material-icons">
+                keyboard_arrow_up
+            </span>
+        </h3>
+        <h3 class="col" (click)="sort('name')">
+            Name
+            <span *ngIf="sortedCol === 'ascName'" class="material-icons">
+                keyboard_arrow_down
+            </span>
+            <span *ngIf="sortedCol === 'dscName'" class="material-icons">
+                keyboard_arrow_up
+            </span>
+        </h3>
+        <h3 class="col" (click)="sort('mobile')">
+            Mobile
+            <span *ngIf="sortedCol === 'ascMobile'" class="material-icons">
+                keyboard_arrow_down
+            </span>
+            <span *ngIf="sortedCol === 'dscMobile'" class="material-icons">
+                keyboard_arrow_up
+            </span>
+        </h3>
+        <h3 class="col" (click)="sort('address')">
+            Address
+            <span *ngIf="sortedCol === 'ascAddress'" class="material-icons">
+                keyboard_arrow_down
+            </span>
+            <span *ngIf="sortedCol === 'dscAddress'" class="material-icons">
+                keyboard_arrow_up
+            </span>
+        </h3>
+    </div>
+    <div class="head" style="box-shadow: none;">
+        <span class="col">
+            <mat-form-field>
+                <input matInput placeholder="Filter ID" type="text" #input1 (input)="filter(input1.value,'eid')">
+            </mat-form-field>
+        </span>
+        <span class="col">
+            <mat-form-field>
+                <input matInput placeholder="Filter Name" type="text" #input2 (input)="filter(input2.value,'name')">
+            </mat-form-field>
+        </span>
+        <span class="col">
+            <mat-form-field>
+                <input matInput placeholder="Filter Mobile" type="text" #input3 (input)="filter(input3.value,'mobile')">
+            </mat-form-field>
+        </span>
+        <span class="col">
+            <mat-form-field>
+                <input matInput placeholder="Filter Address" type="text" #input4
+                    (input)="filter(input4.value,'address')">
+            </mat-form-field>
+        </span>
+    </div>
+    <div *ngFor="let user of users" class="user-block">
+
+        <div class="col">
+            {{user.eid}}
+        </div>
+        <div class="col">
+            {{user.name}}
+        </div>
+        <div class="col">
+            {{user.mobile}}
+        </div>
+        <div class="col">
+            {{user.address}}
+        </div>
+    </div>
+</mat-card>
