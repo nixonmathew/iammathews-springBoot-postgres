@@ -40,6 +40,7 @@ public class UserController {
 	@PostMapping(value = "/users")
 	@CrossOrigin(origins = "http://localhost:4200")
     public Users createUser(@RequestBody Users user) {
+		System.out.println(user);
 		return userService.createUser(user);
 	}
 		

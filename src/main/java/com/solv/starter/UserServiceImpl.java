@@ -32,10 +32,10 @@ public class UserServiceImpl implements UserService{
 		List<Users> sortedUsers = new ArrayList();
 		if(col.contains("eid")) {
 			if(sortDir.contains("asc")) {
-				sortedUsers = users.stream().sorted(Comparator.comparing(Users::getEid)).collect(Collectors.toList());
+				sortedUsers = users.stream().sorted(Comparator.comparing(Users::getId)).collect(Collectors.toList());
 			}
 			else if(sortDir.contains("dsc")) {
-				sortedUsers = users.stream().sorted(Comparator.comparing(Users::getEid).reversed()).collect(Collectors.toList());
+				sortedUsers = users.stream().sorted(Comparator.comparing(Users::getId).reversed()).collect(Collectors.toList());
 			}
 		}
 		else if(col.contains("address")) {
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService{
 		if(value.length() > 0) {
 			List <Users> filteredUsers = new ArrayList();
 			if(col.equals("eid")) {
-				filteredUsers = users.stream().filter(res -> String.valueOf(res.getEid()).contains(value)).collect(Collectors.toList());				
+				filteredUsers = users.stream().filter(res -> String.valueOf(res.getId()).contains(value)).collect(Collectors.toList());				
 			}
 			else if(col.equals("name")) {
 				filteredUsers = users.stream().filter(res -> res.getName().toLowerCase().contains(value.toLowerCase())).collect(Collectors.toList());

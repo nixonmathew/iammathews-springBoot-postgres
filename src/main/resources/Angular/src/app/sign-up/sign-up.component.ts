@@ -26,10 +26,10 @@ export class SignUpComponent implements OnInit {
       name: this.name,
       mobile: this.mobile,
       address: this.address,
-      // user_auth: {
-      //   uname: this.uname,
-      //   password: this.password
-      // }
+      user_auth: {
+        username: this.uname,
+        password: this.password
+      }
     }
     console.log(obj)
     this.http.post('http://localhost:8080/bil/users', obj).subscribe(res => {
