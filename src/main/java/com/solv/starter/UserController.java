@@ -39,19 +39,9 @@ public class UserController {
 	
 	@PostMapping(value = "/users")
 	@CrossOrigin(origins = "http://localhost:4200")
-    public Users createUser() {
-		UsersAuth usersAuth = new UsersAuth();
-		usersAuth.setUsername("vikram");
-		usersAuth.setPassword("passVik");
-
-		Users newUser = new Users();
-		newUser.setName("VLC");
-		newUser.setMobile("9788780900");
-		newUser.setAddress("sample address");
-		newUser.setUser_auth(usersAuth);
-
-		System.out.println(newUser);
-		return userService.createUser(newUser);
+    public Users createUser(@RequestBody Users users) {
+		System.out.println(users);
+		return userService.createUser(users);
 	}
 		
 	
