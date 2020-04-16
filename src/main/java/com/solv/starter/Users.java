@@ -29,8 +29,8 @@ public class Users {
 	@Column(name="address")
 	private String address ;
 
-	@OneToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name = "id" ,referencedColumnName = "user_auth_id")
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_auth_id")
 	private UsersAuth user_auth ;
 	
 	public UsersAuth getUser_auth() {
