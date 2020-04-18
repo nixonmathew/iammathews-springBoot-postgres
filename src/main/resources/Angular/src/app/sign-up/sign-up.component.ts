@@ -34,7 +34,7 @@ export class SignUpComponent implements OnInit {
     console.log(obj)
     this.http.post('http://localhost:8080/bil/users', obj).subscribe(res => {
       console.log(res);
-      // this.router.navigateByUrl('/login')
+      this.router.navigateByUrl('/login')
       this.snackBar.open("User " + obj.name + " has been created", 'Dismiss');
     })
   }

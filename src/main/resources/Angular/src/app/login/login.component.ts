@@ -20,13 +20,13 @@ export class LoginComponent implements OnInit {
 
   submit() {
     let obj = {
-      userName: this.userName,
+      username: this.userName,
       password: this.password
     }
-    this.http.post('http://localhost:8080/bil/login', obj).subscribe(res => {
+    this.http.post('http://localhost:8080/bil/users/login', obj).subscribe(res => {
       console.log(res);
       this.router.navigateByUrl('/home');
-      this.snackBar.open("Login Successful");
+      this.snackBar.open("Login Successful", 'Dismiss');
     })
   }
 }

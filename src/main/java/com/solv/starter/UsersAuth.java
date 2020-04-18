@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user_auth")
+//@Table(name = "user_auth")
 public class UsersAuth {
 
 	@Id

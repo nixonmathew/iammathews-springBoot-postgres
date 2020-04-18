@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
+@CrossOrigin
 public class UserController {
 
 	@Autowired
@@ -34,8 +35,6 @@ public class UserController {
     public List<Users> getFilteredUsers(@PathVariable String col,@PathVariable String filterBy) {
 		return userService.getFilteredUsers(col,filterBy);
 	}
-		
-	
 	
 	@PostMapping(value = "/users")
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -44,5 +43,16 @@ public class UserController {
 		return userService.createUser(users);
 	}
 		
-	
+	@PostMapping(value = "/users/login")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public UsersAuth checkIfUser(@RequestBody UsersAuth usersAuth){
+		System.out.println(usersAuth);
+		return userService.checkIfUser(usersAuth);
+	}
+
+	@GetMapping(value = "/users/address/{filterBy}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<Users> getAddressWithText(@PathVariable String filterBy){
+		return userService.getAddressWithText(filterBy);
+	}
 }
