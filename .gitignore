@@ -29,3 +29,14 @@ build/
 
 ### VS Code ###
 .vscode/
+target/
+.env
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+node_modules
+docs/tmp/
+docs/java-getting-started/
+docs/deploying-spring-boot-apps/
