@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
     this.getAllData();
   }
   getAllData() {
-    let url = 'http://localhost:8080/bil/users/';
+    let url = environment.url + '/users/';
     this.http.get(url).subscribe((res: any) => {
       console.log(res);
       this.users = res;
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
   }
   sort(col) {
     let sortDir = this.getColSorted(col).substring(0, 3);
-    let url = "http://localhost:8080/bil/users/sort/" + col + '/sortDir/' + sortDir
+    let url = environment.url + "/users/sort/" + col + '/sortDir/' + sortDir
     this.http.get(url).subscribe((res: any) => {
       this.users = res;
     })
@@ -32,7 +33,7 @@ export class HomeComponent implements OnInit {
   filter(value, col) {
     if (value.length) {
       console.log(value, col)
-      let url = "http://localhost:8080/bil/users/filter/" + col + "/" + value
+      let url = environment.url + "/users/filter/" + col + "/" + value
       this.http.get(url).subscribe((res: any) => {
         this.users = res;
       })

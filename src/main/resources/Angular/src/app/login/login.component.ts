@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
       username: this.userName,
       password: this.password
     }
-    this.http.post('http://localhost:8080/bil/users/login', obj).subscribe(res => {
+    this.http.post(environment.url + '/users/login', obj).subscribe(res => {
       console.log(res);
       this.router.navigateByUrl('/home');
       this.snackBar.open("Login Successful", 'Dismiss');

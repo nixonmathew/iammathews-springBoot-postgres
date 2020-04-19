@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-sign-up',
@@ -32,7 +33,7 @@ export class SignUpComponent implements OnInit {
       }
     }
     console.log(obj)
-    this.http.post('http://localhost:8080/bil/users', obj).subscribe(res => {
+    this.http.post(environment.url + '/users', obj).subscribe(res => {
       console.log(res);
       this.router.navigateByUrl('/login')
       this.snackBar.open("User " + obj.name + " has been created", 'Dismiss');
