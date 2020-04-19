@@ -1,7 +1,6 @@
 
 server:
-  servlet:
-    context-path: /bil 
+  port : 8080 
 spring:
   application:
     name: UserPoolService
@@ -24,3 +23,9 @@ spring:
       hibernate.default_schema: public
     hibernate:
       ddl-auto: update
+
+
+    # url: jdbc:postgresql://localhost:5432/postgres
+    # driver-class-name: org.postgresql.Driver
+    # username: postgres
+    # password: gunnerss
