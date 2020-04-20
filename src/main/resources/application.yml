@@ -22,10 +22,12 @@ spring:
       hibernate.jdbc.lob.non_contextual_creation: true
       hibernate.default_schema: public
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
 
 
     # url: jdbc:postgresql://localhost:5432/postgres
     # driver-class-name: org.postgresql.Driver
     # username: postgres
     # password: gunnerss
+    # hibernate:
+    #   ddl-auto: update
