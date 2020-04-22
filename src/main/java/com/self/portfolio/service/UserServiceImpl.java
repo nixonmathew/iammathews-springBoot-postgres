@@ -1,14 +1,22 @@
-package com.solv.starter;
+package com.self.portfolio.service;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.self.portfolio.dto.StateSearchResponse;
+import com.self.portfolio.entity.States;
+import com.self.portfolio.repository.StateRepository;
+import com.self.portfolio.repository.UserAuthRepository;
+import com.self.portfolio.repository.UserRepository;
+import com.self.portfolio.entity.Users;
+import com.self.portfolio.entity.UsersAuth;
+import com.self.portfolio.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.swing.plaf.nimbus.State;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -17,7 +25,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private UserAuthRepository userAuthRepository;
-
+    @Autowired
+    private StateRepository stateRepository;
 
     @Override
     public List<Users> getUsers() {
@@ -114,9 +123,19 @@ public class UserServiceImpl implements UserService {
         try {
             users = userRepository.getAddressWithText(address);
         } catch (Exception e) {
-
         }
         return users;
     }
 
+    @Override
+    public List<StateSearchResponse> getStates() {
+        List<States> states = stateRepository.findAll();
+        List<StateSearchResponse> DtoStates = states.stream().map(this::convertToDto).collect(Collectors.toList());
+        System.out.println(DtoStates);
+        return DtoStates;
+    }
+
+    private <T> StateSearchResponse convertToDto(T qualification) {
+        return Utils.convertToDto(qualification, StateSearchResponse.class);
+    }
 }

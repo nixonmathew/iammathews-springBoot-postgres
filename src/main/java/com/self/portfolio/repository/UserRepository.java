@@ -1,5 +1,6 @@
-package com.solv.starter;
+package com.self.portfolio.repository;
 
+import com.self.portfolio.entity.Users;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
