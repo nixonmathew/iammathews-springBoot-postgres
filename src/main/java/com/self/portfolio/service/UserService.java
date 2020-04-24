@@ -15,6 +15,5 @@ public interface UserService {
 	public List<Users> getSortedUsers(String col,String dir);
 	public List<Users> getFilteredUsers(String col, String value);
 	public UsersAuth checkIfUser(UsersAuth usersAuth);
-	public List<Users> getAddressWithText(String address);
 	public List<StateSearchResponse> getStates();
 }

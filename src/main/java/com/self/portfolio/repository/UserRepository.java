@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface UserRepository extends CrudRepository<Users, Integer>{
 
-    @Query("SELECT u from Users u WHERE LOWER(u.address) like %:address%")
-    List<Users> getAddressWithText(@Param("address") String address);
+//    @Query("SELECT u from Users u WHERE LOWER(u.address) like %:address%")
+//    List<Users> getAddressWithText(@Param("address") String address);
 
 }

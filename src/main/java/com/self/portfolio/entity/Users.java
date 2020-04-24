@@ -1,5 +1,7 @@
 package com.self.portfolio.entity;
 
+import com.self.portfolio.dto.StateSearchResponse;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,87 +17,82 @@ import javax.persistence.Table;
 @Table(name = "users")
 public class Users {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
 
-	@Column(name="name")
-	private String name;
+    @Column(name = "name")
+    private String name;
 
-	@Column(name="mobile")
-	private String mobile ;
+    @Column(name = "mobile")
+    private String mobile;
 
-	@Column(name="address")
-	private String address ;
+    @Column(name = "state")
+    private String state;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_auth_id")
-	private UsersAuth user_auth ;
-	
-	public UsersAuth getUser_auth() {
-		return user_auth;
-	}
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_auth_id")
+    private UsersAuth user_auth;
 
-
-	public void setUser_auth(UsersAuth user_auth) {
-		this.user_auth = user_auth;
-	}
+    public UsersAuth getUser_auth() {
+        return user_auth;
+    }
 
 
-	public Users() {
-		super();
-	}
+    public void setUser_auth(UsersAuth user_auth) {
+        this.user_auth = user_auth;
+    }
 
 
-	public Users(String name, String mobile, String address) {
-		super();
-		this.name = name;
-		this.mobile = mobile;
-		this.address = address;
-	}
+    public Users() {
+        super();
+    }
 
 
-	@Override
-	public String toString() {
-		return "Users [id=" + id + ", name=" + name + ", mobile=" + mobile + ", address=" + address + ", user_auth="
-				+ user_auth + ",test =  ," + user_auth.toString()  + "]";
-	}
+    public Users(int id, String name, String mobile, String state) {
+        this.id = id;
+        this.name = name;
+        this.mobile = mobile;
+        this.state = state;
+    }
+
+    @Override
+    public String toString() {
+        return "Users [id=" + id + ", name=" + name + ", mobile=" + mobile + ", user_auth="
+                + user_auth + ",test =  ," + user_auth.toString() + "]";
+    }
 
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getMobile() {
-		return mobile;
-	}
+    public String getMobile() {
+        return mobile;
+    }
 
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public String getState() {
+        return state;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-
-
-
+    public void setState(String state) {
+        this.state = state;
+    }
 }

@@ -6,13 +6,10 @@ import com.self.portfolio.dto.StateSearchResponse;
 import com.self.portfolio.service.UserService;
 import com.self.portfolio.entity.Users;
 import com.self.portfolio.entity.UsersAuth;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
@@ -21,46 +18,48 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    private static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+
+    @RequestMapping("/")
+    public void index() {
+        LOGGER.info("started");
+    }
+
     @GetMapping(value = "/users")
-    @CrossOrigin
     public List<Users> getUsers() {
+        LOGGER.info("Controller - Getting users started");
         return userService.getUsers();
     }
 
     @GetMapping(value = "/users/sort/{col}/sortDir/{sortDir}")
-    @CrossOrigin
     public List<Users> getSortedUsers(@PathVariable String col, @PathVariable String sortDir) {
+        LOGGER.info("Controller - Sorting users started");
         return userService.getSortedUsers(col, sortDir);
     }
 
     @GetMapping(value = "/users/filter/{col}/{filterBy}")
-    @CrossOrigin
     public List<Users> getFilteredUsers(@PathVariable String col, @PathVariable String filterBy) {
+        LOGGER.info("Controller - Filtering Users get operation started");
         return userService.getFilteredUsers(col, filterBy);
     }
 
     @PostMapping(value = "/users")
-    @CrossOrigin
     public Users createUser(@RequestBody Users users) {
+        LOGGER.info("Controller - Creating Users started");
         System.out.println(users);
         return userService.createUser(users);
     }
 
     @PostMapping(value = "/users/login")
-    @CrossOrigin
     public UsersAuth checkIfUser(@RequestBody UsersAuth usersAuth) {
+        LOGGER.info("Controller - Checking If User exist started");
         System.out.println(usersAuth);
         return userService.checkIfUser(usersAuth);
     }
 
-    @GetMapping(value = "/users/address/{filterBy}")
-    @CrossOrigin
-    public List<Users> getAddressWithText(@PathVariable String filterBy) {
-        return userService.getAddressWithText(filterBy);
+    @GetMapping(value = "/states")
+    public List<StateSearchResponse> getStates() {
+        LOGGER.info("Controller - Getting List of States controller started");
+        return userService.getStates();
     }
-
-    @GetMapping(value ="/states")
-	public List<StateSearchResponse> getStates(){
-    	return userService.getStates();
-	}
 }

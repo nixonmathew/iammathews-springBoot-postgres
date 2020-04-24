@@ -13,10 +13,11 @@ import com.self.portfolio.repository.UserRepository;
 import com.self.portfolio.entity.Users;
 import com.self.portfolio.entity.UsersAuth;
 import com.self.portfolio.util.Utils;
+import com.self.portfolio.exception.UserException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.swing.plaf.nimbus.State;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -28,8 +29,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private StateRepository stateRepository;
 
+    private final static Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
+
     @Override
     public List<Users> getUsers() {
+        LOGGER.info("Impl - getUsers service started");
         List<Users> users = new ArrayList<>();
         userRepository.findAll().forEach(users::add);
         return users;
@@ -37,6 +41,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Users> getSortedUsers(String col, String sortDir) {
+        LOGGER.info("Impl - getSortedUsers service started");
         List<Users> users = new ArrayList<>();
         userRepository.findAll().forEach(users::add);
         List<Users> sortedUsers = new ArrayList();
@@ -46,11 +51,11 @@ public class UserServiceImpl implements UserService {
             } else if (sortDir.contains("dsc")) {
                 sortedUsers = users.stream().sorted(Comparator.comparing(Users::getId).reversed()).collect(Collectors.toList());
             }
-        } else if (col.contains("address")) {
+        } else if (col.contains("state")) {
             if (sortDir.contains("asc")) {
-                sortedUsers = users.stream().sorted(Comparator.comparing(Users::getAddress)).collect(Collectors.toList());
+                sortedUsers = users.stream().sorted(Comparator.comparing(Users::getState)).collect(Collectors.toList());
             } else if (sortDir.contains("dsc")) {
-                sortedUsers = users.stream().sorted(Comparator.comparing(Users::getAddress).reversed()).collect(Collectors.toList());
+                sortedUsers = users.stream().sorted(Comparator.comparing(Users::getState).reversed()).collect(Collectors.toList());
             }
         } else if (col.contains("name")) {
             if (sortDir.contains("asc")) {
@@ -71,6 +76,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Users> getFilteredUsers(String col, String value) {
+        LOGGER.info("Impl - getFilteredUsers service started");
         List<Users> users = new ArrayList<>();
         userRepository.findAll().forEach(users::add);
         if (value.length() > 0) {
@@ -81,8 +87,8 @@ public class UserServiceImpl implements UserService {
                 filteredUsers = users.stream().filter(res -> res.getName().toLowerCase().contains(value.toLowerCase())).collect(Collectors.toList());
             } else if (col.equals("mobile")) {
                 filteredUsers = users.stream().filter(res -> res.getMobile().toLowerCase().contains(value.toLowerCase())).collect(Collectors.toList());
-            } else if (col.equals("address")) {
-                filteredUsers = users.stream().filter(res -> res.getAddress().toLowerCase().contains(value.toLowerCase())).collect(Collectors.toList());
+            } else if (col.equals("state")) {
+                filteredUsers = users.stream().filter(res -> res.getState().toLowerCase().contains(value.toLowerCase())).collect(Collectors.toList());
             }
             return filteredUsers;
         } else {
@@ -93,6 +99,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UsersAuth checkIfUser(UsersAuth usersAuth) {
+        LOGGER.info("Impl - checkIfUser service started");
 
         UsersAuth usersAuthData = null;
         try {
@@ -107,31 +114,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Users createUser(Users user) {
+        LOGGER.info("Impl - createUser service started");
 
         try {
             Users user1 = userRepository.save(user);
             return user1;
         } catch (Exception e) {
-            return null;
-
+            throw new UserException("customer doesnot exist");
         }
-    }
-
-    @Override
-    public List<Users> getAddressWithText(String address) {
-        List<Users> users = new ArrayList<>();
-        try {
-            users = userRepository.getAddressWithText(address);
-        } catch (Exception e) {
-        }
-        return users;
     }
 
     @Override
     public List<StateSearchResponse> getStates() {
+        LOGGER.info("Impl - getStates service started");
         List<States> states = stateRepository.findAll();
         List<StateSearchResponse> DtoStates = states.stream().map(this::convertToDto).collect(Collectors.toList());
-        System.out.println(DtoStates);
+        System.out.println(DtoStates.toString());
         return DtoStates;
     }
 

@@ -47,9 +47,4 @@ public class UserController {
 		return userService.checkIfUser(usersAuth);
 	}
 
-	@GetMapping(value = "/users/address/{filterBy}")
-	@CrossOrigin
-	public List<Users> getAddressWithText(@PathVariable String filterBy) {
-		return userService.getAddressWithText(filterBy);
-	}
 }
