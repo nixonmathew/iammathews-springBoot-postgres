@@ -1,6 +1,5 @@
 package com.self.portfolio.entity;
 
-import com.self.portfolio.dto.StateSearchResponse;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users")
@@ -23,32 +23,33 @@ public class Users {
     private int id;
 
     @Column(name = "name")
+    @NotNull
     private String name;
 
     @Column(name = "mobile")
+    @NotNull
     private String mobile;
 
     @Column(name = "state")
+    @NotNull
     private String state;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_auth_id")
+    @NotNull
     private UsersAuth user_auth;
 
     public UsersAuth getUser_auth() {
         return user_auth;
     }
 
-
     public void setUser_auth(UsersAuth user_auth) {
         this.user_auth = user_auth;
     }
 
-
     public Users() {
         super();
     }
-
 
     public Users(int id, String name, String mobile, String state) {
         this.id = id;
@@ -59,10 +60,9 @@ public class Users {
 
     @Override
     public String toString() {
-        return "Users [id=" + id + ", name=" + name + ", mobile=" + mobile + ", user_auth="
-                + user_auth + ",test =  ," + user_auth.toString() + "]";
+        return "Users [id=" + id + ", name=" + name + ", mobile=" + mobile + ", user_auth=" + user_auth + ",test =  ,"
+                + user_auth.toString() + "]";
     }
-
 
     public int getId() {
         return id;

@@ -1,6 +1,6 @@
 package com.self.portfolio.dto;
 
-public class StateSearchResponse {
+public class SearchResponse {
 
     private Long id;
     private String code;

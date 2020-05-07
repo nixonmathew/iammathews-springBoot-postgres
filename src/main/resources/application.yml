@@ -1,4 +1,11 @@
+# spring.datasource.url: ${JDBC_DATABASE_URL:}
+# spring.datasource.hikari.connection-timeout=30000
+# spring.datasource.hikari.maximum-pool-size=10
 
+# spring.profiles.active=production
+
+# JUST THIS 
+# server.port=${PORT:5000}
 server:
   port : 8080 
 spring:
@@ -22,10 +29,9 @@ spring:
       hibernate.jdbc.lob.non_contextual_creation: true
       hibernate.default_schema: public
     hibernate:
-      ddl-auto: update
-
-
-    # url: jdbc:postgresql://localhost:5432/postgres
-    # driver-class-name: org.postgresql.Driver
-    # username: postgres
-    # password: gunnerss
+      ddl-auto: create-drop
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
