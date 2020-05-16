@@ -3,6 +3,7 @@ package com.self.portfolio.service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.self.portfolio.dto.IndustrySearchRequest;
@@ -112,12 +113,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UsersAuth checkIfUser(UsersAuth usersAuth) {
-        LOGGER.info("Impl - checkIfUser service started");
+    public Optional<UsersAuth> checkIfUser(UsersAuth usersAuth) {
+        LOGGER.info("Impl - checkIfUser service started" + usersAuth);
 
-        UsersAuth usersAuthData = null;
+        Optional<UsersAuth> usersAuthData = null;
         try {
-            usersAuthData = userAuthRepository.findByUsername(usersAuth.getUsername());
+            usersAuthData = userAuthRepository.findByUserName(usersAuth.getUserName());
         } catch (Exception e) {
             e.printStackTrace();
             throw new UserException("customer doesnot exist");

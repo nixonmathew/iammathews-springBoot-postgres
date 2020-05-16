@@ -29,7 +29,7 @@ spring:
       hibernate.jdbc.lob.non_contextual_creation: true
       hibernate.default_schema: public
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
 management:
   endpoints:
     web:

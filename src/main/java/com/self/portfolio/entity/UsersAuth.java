@@ -11,62 +11,72 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-//@Table(name = "user_auth")
+@Table(name = "users_auth")
 public class UsersAuth {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name="username")
-	private String username;
+	@Column(name = "username")
+	private String userName;
 
-	@Column(name="password")
-	private String password ;
+	@Column(name = "password")
+	private String password;
 
-//	@OneToOne(cascade = CascadeType.ALL ,fetch = FetchType.LAZY,  mappedBy = "user_auth")
-//	private Users users;
+	@Column(name = "active")
+	private Boolean active = true;
+
+	@Column(name = "roles")
+	private String roles;
 
 	public UsersAuth() {
 		super();
-	}
-
-
-	public UsersAuth( String username, String password) {
-		super();
-		this.username = username;
-		this.password = password;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getPassword() {
 		return password;
 	}
 
-	@Override
-	public String toString() {
-		return "UsersAuth [id=" + id + ", username=" + username + ", password=" + password + "]";
-	}
-
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-//
-//	public Users getUsers() {
-//		return users;
-//	}
-//
-//	public void setUsers(Users users) {
-//		this.users = users;
-//	}
 
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	public String getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
+
+	@Override
+	public String toString() {
+		return "UsersAuth [active=" + active + ", id=" + id + ", password=" + password + ", roles=" + roles
+				+ ", username=" + userName + "]";
+	}
+
+	public UsersAuth(String username, String password, Boolean active, String roles) {
+		this.userName = username;
+		this.password = password;
+		this.active = active;
+		this.roles = roles;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 }

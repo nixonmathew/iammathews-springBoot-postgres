@@ -1,9 +1,10 @@
 package com.self.portfolio.repository;
 
+import java.util.Optional;
 import com.self.portfolio.entity.UsersAuth;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserAuthRepository extends CrudRepository<UsersAuth, Integer>{
+public interface UserAuthRepository extends JpaRepository<UsersAuth, Integer> {
 
-    UsersAuth findByUsername(String userName);
+    Optional<UsersAuth> findByUserName(String userName);
 }

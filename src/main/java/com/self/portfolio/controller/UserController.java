@@ -1,6 +1,7 @@
 package com.self.portfolio.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.self.portfolio.dto.Greeting;
 import com.self.portfolio.dto.HelloMessage;
@@ -8,7 +9,6 @@ import com.self.portfolio.dto.IndustrySearchRequest;
 import com.self.portfolio.dto.SearchResponse;
 import com.self.portfolio.service.UserService;
 import com.self.portfolio.trial.GenericClass;
-import com.self.portfolio.entity.Industry;
 import com.self.portfolio.entity.Users;
 import com.self.portfolio.entity.UsersAuth;
 import org.slf4j.Logger;
@@ -45,6 +45,21 @@ public class UserController {
         return env.toString();
     }
 
+    @GetMapping("/user")
+    public String user() {
+        return ("<h1>Welcome User</h1>");
+    }
+
+    @GetMapping("/login.page.html")
+    public String logindummypage() {
+        return ("<h1>LOGIN</h1>");
+    }
+
+    @GetMapping("/login-error.html")
+    public String loginerrordummypage() {
+        return ("<h1>LOGIN failed</h1>");
+    }
+
     @GetMapping(value = "/users")
     public List<Users> getUsers() {
         LOGGER.info("Controller - Getting users started");
@@ -71,8 +86,8 @@ public class UserController {
     }
 
     @PostMapping(value = "/users/login")
-    public UsersAuth checkIfUser(@RequestBody UsersAuth usersAuth) {
-        LOGGER.info("Controller - Checking If User exist started");
+    public Optional<UsersAuth> checkIfUser(@RequestBody UsersAuth usersAuth) {
+        LOGGER.info("Controller - Checking If User exist started" + usersAuth);
         // System.out.println(usersAuth);
         // Long time = new Long(5000);
         // try {

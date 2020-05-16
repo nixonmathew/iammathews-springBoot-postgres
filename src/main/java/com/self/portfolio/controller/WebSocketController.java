@@ -1,8 +1,5 @@
 package com.self.portfolio.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import com.self.portfolio.dto.Greeting;
 import com.self.portfolio.dto.HelloMessage;
 
