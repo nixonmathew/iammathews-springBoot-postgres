@@ -3,61 +3,63 @@ package com.self.portfolio.controller;
 import java.util.List;
 import java.util.Optional;
 
-import com.self.portfolio.dto.Greeting;
-import com.self.portfolio.dto.HelloMessage;
+import com.self.portfolio.dto.AuthenticationRequest;
+import com.self.portfolio.dto.AuthenticationResponse;
 import com.self.portfolio.dto.IndustrySearchRequest;
 import com.self.portfolio.dto.SearchResponse;
+import com.self.portfolio.service.MyUserDetailService;
 import com.self.portfolio.service.UserService;
-import com.self.portfolio.trial.GenericClass;
+import com.self.portfolio.util.JwtUtil;
 import com.self.portfolio.entity.Users;
 import com.self.portfolio.entity.UsersAuth;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/api")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     @Autowired
-    private Environment env;
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private MyUserDetailService myUserDetailService;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     private static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
-    @Value("${server.port}")
-    private String getServerPort;
+    @PostMapping(value = "/authenticate")
+    @ApiOperation(value = "Generate token if valid user", notes = "Authenticating and returning a jwt token if valid", response = ResponseEntity.class)
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest req) throws Exception {
+        try {
+            authenticationManager
+                    .authenticate(new UsernamePasswordAuthenticationToken(req.getUsername(), req.getPassword()));
+        } catch (BadCredentialsException e) {
+            LOGGER.warn("Authentication Failed" + e);
+            System.out.println(e);
+            throw new Exception("Incorrect Username or Password", e);
+        }
+        final UserDetails userDetails = myUserDetailService.loadUserByUsername(req.getUsername());
 
-    @GetMapping("/")
-    public String index() {
-        LOGGER.info("started");
-        GenericClass<Greeting, HelloMessage> gen = new GenericClass<>(new Greeting(), new HelloMessage());
-        return gen.toString();
-    }
+        final String jwt = jwtUtil.generateToken(userDetails);
+        return ResponseEntity.ok(new AuthenticationResponse(jwt));
 
-    @GetMapping("/envDetails")
-    public String getEnvDetails() {
-        return env.toString();
-    }
-
-    @GetMapping("/user")
-    public String user() {
-        return ("<h1>Welcome User</h1>");
-    }
-
-    @GetMapping("/login.page.html")
-    public String logindummypage() {
-        return ("<h1>LOGIN</h1>");
-    }
-
-    @GetMapping("/login-error.html")
-    public String loginerrordummypage() {
-        return ("<h1>LOGIN failed</h1>");
     }
 
     @GetMapping(value = "/users")
@@ -67,7 +69,9 @@ public class UserController {
     }
 
     @GetMapping(value = "/users/sort/{col}/sortDir/{sortDir}")
-    public List<Users> getSortedUsers(@PathVariable String col, @PathVariable String sortDir) {
+    public List<Users> getSortedUsers(
+            @ApiParam(value = "Col name and the direction of sorting", required = true) @PathVariable String col,
+            @PathVariable String sortDir) {
         LOGGER.info("Controller - Sorting users started");
         return userService.getSortedUsers(col, sortDir);
     }

@@ -13,7 +13,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class MyUserDetails implements UserDetails {
 
-    private String userName;
+	private static final long serialVersionUID = 1L;
+	private String userName;
     private String password;
     private Boolean active;
     private List<GrantedAuthority> roles;
