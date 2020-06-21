@@ -40,9 +40,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+        http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**","/css/**", "/js/**", "/images/**").permitAll()
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/api/authenticate").permitAll()
+                .antMatchers("/extract/**").permitAll()
                 // .antMatchers("/api/resource/download-image").permitAll()
                 .anyRequest().authenticated().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

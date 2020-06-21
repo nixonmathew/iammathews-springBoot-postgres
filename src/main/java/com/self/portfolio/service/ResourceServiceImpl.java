@@ -40,7 +40,7 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public ResponseEntity<Resource> downloadImage() {
         LOGGER.info("Impl - Downloading image started");
-        Resource resource = new ClassPathResource("template/" + IMAGENAME);
+        Resource resource = new ClassPathResource("static/" + IMAGENAME);
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + IMAGENAME).body(resource);
 
